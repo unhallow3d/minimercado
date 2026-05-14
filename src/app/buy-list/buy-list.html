@@ -1,0 +1,23 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Imagen</th>
+            <th>Cantidad</th>
+            
+           
+        </tr>
+    </thead>
+   <tbody>
+    <tr *ngFor="let product of products" [ngClass]="{'offer': product.offer}">
+        <td>{{product.name|titlecase}}</td>   
+        <td>{{product.price|currency}}</td>
+        <td><img [src]="product.image" alt="{{product.name}}" width="100"></td>
+         <td *ngIf="product.stock > 0">{{product.stock}}</td>
+         <td><span class="badge text-bg-warning" *ngIf="product.stock === 0">SIN STOCK</span></td>
+ 
+    </tr>
+
+    </tbody>
+</table>
