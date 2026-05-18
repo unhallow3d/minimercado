@@ -5,7 +5,7 @@
             <th>Precio</th>
             <th>Imagen</th>
             <th>Cantidad</th>
-            
+            <th>Compra</th>
            
         </tr>
     </thead>
@@ -13,10 +13,17 @@
     <tr *ngFor="let product of products" [ngClass]="{'offer': product.offer}">
         <td>{{product.name|titlecase}}</td>   
         <td>{{product.price|currency}}</td>
-        <td><img [src]="product.image" alt="{{product.name}}" width="100"></td>
+        <td><img class="img-thumbnail" [src]="product.image" alt="{{product.name}}" width="100"></td>
          <td *ngIf="product.stock > 0">{{product.stock}}</td>
          <td><span class="badge text-bg-warning" *ngIf="product.stock === 0">SIN STOCK</span></td>
- 
+        <td>
+            <button class="btn btn-primary btn-sm" (click)="downQuantity(product)">-</button>
+            <input type="text" 
+            [(ngModel)]="product.quantity"
+            (keyup)="changeQuantity($event, product)"
+            >
+            <button class="btn btn-primary btn-sm" (click)="upQuantity(product)">+</button>
+        </td>
     </tr>
 
     </tbody>

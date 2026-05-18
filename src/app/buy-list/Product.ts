@@ -1,3 +1,4 @@
+
 export interface Product{
     id: number;
     name: string;
@@ -5,4 +6,5 @@ export interface Product{
     stock: number;
     image: string;
     offer:boolean;
+    quantity: number;
 }

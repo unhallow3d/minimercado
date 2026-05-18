@@ -15,7 +15,8 @@ export class BuyList {
     price: 5.00,
     stock: 0,
     image: 'assets/img/coca-cola.jpg',
-    offer: true
+    offer: true,
+    quantity: 0
   },
      {
     id: 2,
@@ -23,7 +24,19 @@ export class BuyList {
     price: 900,
     stock: 5,
     image: 'assets/img/fideos.jpg',
-    offer:false
+    offer:false,
+    quantity: 0
   }
 ]
+upQuantity(product: Product): void{
+  if(product.quantity+1<=product.stock)
+      product.quantity++;
+}
+downQuantity(product: Product):void{
+  if(product.quantity-1 >=0)
+    product.quantity--;
+}
+changeQuantity(event: any, product: Product ): void{
+  console.log (event.key)
+}
 }
