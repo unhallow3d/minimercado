@@ -6,9 +6,11 @@ import { App } from './app';
 import { BuyList } from './buy-list/buy-list';
 import { BuyCart } from './buy-cart/buy-cart';
 import { FormsModule } from '@angular/forms';
+import { MinimarketAbout } from './minimarket-about/minimarket-about';
+import { MinimarketProducts } from './minimarket-products/minimarket-products';
 
 @NgModule({
-  declarations: [App, BuyList, BuyCart],
+  declarations: [App, BuyList, BuyCart, MinimarketAbout, MinimarketProducts],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
