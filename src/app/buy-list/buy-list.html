@@ -1,30 +1,51 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Imagen</th>
-            <th>Cantidad</th>
-            <th>Compra</th>
-           
-        </tr>
-    </thead>
-   <tbody>
-    <tr *ngFor="let product of products" [ngClass]="{'offer': product.offer}">
-        <td>{{product.name|titlecase}}</td>   
-        <td>{{product.price|currency}}</td>
-        <td><img class="img-thumbnail" [src]="product.image" alt="{{product.name}}" width="100"></td>
-         <td *ngIf="product.stock > 0">{{product.stock}}</td>
-         <td><span class="badge text-bg-warning" *ngIf="product.stock === 0">SIN STOCK</span></td>
-        <td>
-            <button class="btn btn-primary btn-sm" (click)="downQuantity(product)">-</button>
-            <input type="text" 
-            [(ngModel)]="product.quantity"
-            (keyup)="changeQuantity($event, product)"
-            >
-            <button class="btn btn-primary btn-sm" (click)="upQuantity(product)">+</button>
-        </td>
+<table class="table table-hover align-middle">
+  <thead class="table-success">
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Imagen</th>
+      <th>Stock</th>
+      <th>Cantidad</th>
+      <th>Acción</th>
     </tr>
-
-    </tbody>
+  </thead>
+  <tbody>
+    @for (product of products; track product.id) {
+      <tr [class.table-warning]="product.offer">
+        <td>
+          {{ product.name | titlecase }}
+          @if (product.offer) {
+            <span class="badge bg-danger ms-2">OFERTA</span>
+          }
+        </td>
+        <td>{{ product.price | currency:'ARS':'symbol':'1.0-0' }}</td>
+        <td>
+          <img class="img-thumbnail" [src]="product.image" [alt]="product.name" width="80" />
+        </td>
+        <td>
+          @if (product.stock > 0) {
+            <span>{{ product.stock }}</span>
+          } @else {
+            <span class="badge text-bg-warning">SIN STOCK</span>
+          }
+        </td>
+        <td>
+          @if (product.stock > 0) {
+            <app-input-integer
+              [quantity]="product.quantity"
+              [max]="product.stock"
+              (maxReached)="maxReached($event)">
+            </app-input-integer>
+          }
+        </td>
+        <td>
+          @if (product.stock > 0) {
+            <button class="btn btn-sm btn-success" (click)="onAdd(product)">
+              Agregar
+            </button>
+          }
+        </td>
+      </tr>
+    }
+  </tbody>
 </table>

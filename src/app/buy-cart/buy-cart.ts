@@ -1,33 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
+import { CartItem } from '../interfaces/cart-item.interface';
 
 @Component({
   selector: 'app-buy-cart',
   standalone: false,
   templateUrl: './buy-cart.html',
-  styleUrl: './buy-cart.scss',
+  styleUrl: './buy-cart.scss'
 })
-export class BuyCart {
-  cartProducts = [
-  {
-    name: 'Coca Cola',
-    description: 'Gaseosa 2L',
-    price: 2500,
-    quantity: 2,
-    image: 'assets/img/coca-cola.jpg'
-  },
-  {
-    name: 'Papas',
-    description: 'Papas fritas',
-    price: 1800,
-    quantity: 1,
-    image: 'assets/img/papas.jpg'
-  }
-];
+export class BuyCart implements OnInit {
+  private cartService = inject(CartService);
 
-get total(): number {
-  return this.cartProducts.reduce(
-    (acc, product) => acc + (product.price * product.quantity),
-    0
-  );
-}
+  items: CartItem[] = [];
+  total: number = 0;
+
+  ngOnInit(): void {
+    this.refresh();
+  }
+
+  refresh(): void {
+    this.items = this.cartService.getItems();
+    this.total = this.cartService.getTotal();
+  }
+
+  remove(productId: number): void {
+    this.cartService.removeProduct(productId);
+    this.refresh();
+  }
+
+  clear(): void {
+    this.cartService.clearCart();
+    this.refresh();
+  }
 }

@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-minimarket-about',
   standalone: false,
   templateUrl: './minimarket-about.html',
-  styleUrl: './minimarket-about.scss',
+  styleUrl: './minimarket-about.scss'
 })
 export class MinimarketAbout {}

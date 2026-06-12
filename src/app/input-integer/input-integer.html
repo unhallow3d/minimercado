@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center gap-1">
+  <button class="btn btn-outline-success btn-sm" (click)="downQuantity()">−</button>
+  <input
+    type="number"
+    class="form-control form-control-sm text-center"
+    style="width: 60px;"
+    [(ngModel)]="quantity"
+    (change)="changeQuantity()"
+    min="0"
+    [max]="max"
+  />
+  <button class="btn btn-outline-success btn-sm" (click)="upQuantity()" [disabled]="quantity >= max">+</button>
+</div>

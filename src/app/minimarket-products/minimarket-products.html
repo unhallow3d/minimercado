@@ -1,1 +1,17 @@
-<p>minimarket-products works!</p>
+<h2 class="mb-4">Nuestros Productos</h2>
+
+<!-- Filtro por categoría -->
+<div class="mb-4 d-flex flex-wrap gap-2">
+  @for (cat of categories; track cat) {
+    <button
+      class="btn btn-sm"
+      [class.btn-success]="selectedCategory === cat"
+      [class.btn-outline-success]="selectedCategory !== cat"
+      (click)="filterByCategory(cat)">
+      {{ cat }}
+    </button>
+  }
+</div>
+
+<!-- Lista de productos -->
+<app-buy-list [products]="filteredProducts" (addToCart)="addToCart($event)"></app-buy-list>

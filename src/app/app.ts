@@ -1,11 +1,16 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.html',
   standalone: false,
+  templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('minimercado');
+  private cartService = inject(CartService);
+
+  get cartTotal(): number {
+    return this.cartService.getTotalItems();
+  }
 }
