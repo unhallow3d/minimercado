@@ -18,7 +18,7 @@
             <span class="badge bg-danger ms-2">OFERTA</span>
           }
         </td>
-        <td>{{ product.price | currency:'ARS':'symbol':'1.0-0' }}</td>
+        <td>{{ product.price | currency: 'ARS' : 'symbol' : '1.0-0' }}</td>
         <td>
           <img class="img-thumbnail" [src]="product.image" [alt]="product.name" width="80" />
         </td>
@@ -34,15 +34,15 @@
             <app-input-integer
               [quantity]="product.quantity"
               [max]="product.stock"
-              (maxReached)="maxReached($event)">
+              (quantityChange)="product.quantity = $event"
+              (maxReached)="maxReached($event)"
+            >
             </app-input-integer>
           }
         </td>
         <td>
           @if (product.stock > 0) {
-            <button class="btn btn-sm btn-success" (click)="onAdd(product)">
-              Agregar
-            </button>
+            <button class="btn btn-sm btn-success" (click)="onAdd(product)">Agregar</button>
           }
         </td>
       </tr>

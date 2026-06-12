@@ -14,6 +14,7 @@ export class BuyList {
   onAdd(product: Product): void {
     if (product.quantity < 1) product.quantity = 1;
     this.addToCart.emit(product);
+    product.quantity = 0; // ← resetea el input
   }
 
   maxReached(msg: string): void {

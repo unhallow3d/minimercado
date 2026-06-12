@@ -29,8 +29,8 @@ export class MinimarketProducts implements OnInit {
       : this.productsService.getProductsByCategory(category);
   }
 
-  addToCart(product: Product): void {
-    this.cartService.addProduct(product, product.quantity || 1);
-    alert(`✅ "${product.name}" agregado al carrito`);
-  }
+addToCart(product: Product): void {
+  this.cartService.addProduct(product, product.quantity || 1);
+  alert(`✅ "${product.name}" agregado al carrito`);
+}
 }
